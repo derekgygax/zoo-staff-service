@@ -22,6 +22,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
+import local.zoo.staffservice.dto.staff.StaffBase;
 import local.zoo.staffservice.enums.Title;
 
 @Entity
@@ -39,18 +40,17 @@ public class Staff {
     @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
-    @Email
-    @Column(name = "email", nullable = false, length = 250)
-    private String email;
-
-    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "Invalid phone number format")
-    @Column(name = "phone_number", nullable = false, length = 15)
-    private String phoneNumber;
-
-    // SHOULD WE MAKE THIS AN ENUM!!??
     @Column(name = "title", nullable = false)
     @Enumerated(EnumType.STRING)
     private Title title;
+
+    @Email
+    @Column(name = "email", nullable = false, length = 250, unique = true)
+    private String email;
+
+    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "Invalid phone number format")
+    @Column(name = "phone_number", nullable = false, length = 15, unique = true)
+    private String phoneNumber;
 
     @Column(name = "hire_date", nullable = false, columnDefinition = "DATE")
     private LocalDate hireDate;
@@ -92,51 +92,110 @@ public class Staff {
         this.startDate = startDate;
     }
 
+    public Staff(StaffBase staffBase) {
+        this.firstName = staffBase.firstName();
+        this.lastName = staffBase.lastName();
+        this.email = staffBase.email();
+        this.phoneNumber = staffBase.phoneNumber();
+        this.title = staffBase.title();
+        this.hireDate = staffBase.hireDate();
+        this.startDate = staffBase.startDate();
+    }
+
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Title getTitle() {
         return title;
     }
 
+    public void setTitle(Title title) {
+        this.title = title;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public LocalDate getHireDate() {
         return hireDate;
+    }
+
+    public void setHireDate(LocalDate hireDate) {
+        this.hireDate = hireDate;
     }
 
     public LocalDate getStartDate() {
         return startDate;
     }
 
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
     public Instant getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Instant getUpdatedAt() {
         return updatedAt;
     }
 
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<StaffDepartment> getStaffDepartments() {
+        return staffDepartments;
+    }
+
+    public void setStaffDepartments(List<StaffDepartment> staffDepartments) {
+        this.staffDepartments = staffDepartments;
+    }
+
     @Override
     public String toString() {
-        return "Staff [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-                + ", phoneNumber=" + phoneNumber + ", title=" + title + ", hireDate=" + hireDate + ", startDate="
-                + startDate + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+        return "Staff [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", title=" + title
+                + ", email=" + email + ", phoneNumber=" + phoneNumber + ", hireDate=" + hireDate + ", startDate="
+                + startDate + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", staffDepartments="
+                + staffDepartments + "]";
     }
 
 }
