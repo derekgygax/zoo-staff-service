@@ -19,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import local.zoo.staffservice.dto.department.DepartmentBase;
 
 @Entity
 @Table(name = "department")
@@ -58,6 +59,11 @@ public class Department {
         this.description = description;
     }
 
+    public Department(DepartmentBase departmentBase) {
+        this.name = departmentBase.name();
+        this.description = departmentBase.description();
+    }
+
     public UUID getId() {
         return id;
     }
@@ -82,10 +88,34 @@ public class Department {
         return staffDepartments;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setStaffDepartments(List<StaffDepartment> staffDepartments) {
+        this.staffDepartments = staffDepartments;
+    }
+
     @Override
     public String toString() {
         return "Department [id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt
-                + ", updatedAt=" + updatedAt + "]";
+                + ", updatedAt=" + updatedAt + ", staffDepartments=" + staffDepartments + "]";
     }
 
 }
