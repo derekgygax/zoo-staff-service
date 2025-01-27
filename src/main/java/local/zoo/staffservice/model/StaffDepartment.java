@@ -25,12 +25,12 @@ public class StaffDepartment {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "staff_id", referencedColumnName = "id", nullable = false)
-    private Staff staff;
-
-    @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
     private Department department;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id", referencedColumnName = "id", nullable = false)
+    private Staff staff;
 
     @Column(name = "role", nullable = false, length = 100)
     private String role;
@@ -45,11 +45,67 @@ public class StaffDepartment {
     // Use Instant for UTC timestamps
     private Instant updatedAt;
 
+    public StaffDepartment() {
+    }
+
+    public StaffDepartment(Department department, Staff staff, String role) {
+        this.department = department;
+        this.staff = staff;
+        this.role = role;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "StaffDepartment [id=" + id + ", department=" + department + ", staff=" + staff + ", role=" + role
+                + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+    }
+
 }
-
-// staff_department_id INT (PK, Auto)
-
-// staff_id INT (FK)`
-
-// department_id INT (FK)`
-// role_in_department VARCHAR
