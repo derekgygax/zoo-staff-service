@@ -11,5 +11,5 @@ public record StaffBase(
         String email,
         String phoneNumber,
         LocalDate hireDate,
-        LocalDate startDate) implements StaffBassInterface {
+        LocalDate startDate) implements StaffBaseInterface {
 }

@@ -22,5 +22,5 @@ public record StaffResponse(
         @Schema(required = true, title = "Time Record Created", description = "The time the record was created") Instant createdAt,
         @Schema(required = true, title = "Time Record Updated", description = "The time the record was last udpated") Instant updatedAt,
         @Schema(required = true, title = "Staff Departments", description = "List of Staff Departments") List<StaffDepartment> staffDepartments)
-        implements StaffBassInterface {
+        implements StaffBaseInterface {
 }

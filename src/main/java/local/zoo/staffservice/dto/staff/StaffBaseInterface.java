@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import local.zoo.staffservice.enums.Title;
 
-public sealed interface StaffBassInterface permits StaffBase, StaffResponse {
+public sealed interface StaffBaseInterface permits StaffBase, StaffResponse {
     @Schema(required = true, title = "First Name", maxLength = 100, description = "Staff first name")
     String firstName();
 

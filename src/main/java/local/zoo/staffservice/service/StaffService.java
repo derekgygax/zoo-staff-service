@@ -29,15 +29,18 @@ public class StaffService {
 
     public StaffBase getStaffBaseById(UUID staffId) {
         StaffBase staffBase = this.staffRepository.findStaffBaseById(staffId);
+        if (staffBase == null) {
+            throw new EntityNotFoundException("Staff member not found with the ID: " + staffId);
+        }
         return staffBase;
     }
 
     public List<Staff> getAllStaff() {
-        return staffRepository.listAll();
+        return this.staffRepository.listAll();
     }
 
     public List<StaffIdentifier> getAllStaffIdentifiers() {
-        return staffRepository.findAllIdentifiers();
+        return this.staffRepository.findAllIdentifiers();
     }
 
     // Add a new staff member
@@ -48,19 +51,19 @@ public class StaffService {
     }
 
     @Transactional
-    public void updateStaff(UUID staffId, StaffBase staffBase) {
+    public void updateStaff(UUID staffId, StaffBase updatedStaffBase) {
 
         // Get the existing staff
         Staff existingStaff = getStaffById(staffId);
 
         // Set the new values
-        existingStaff.setFirstName(staffBase.firstName());
-        existingStaff.setLastName(staffBase.lastName());
-        existingStaff.setTitle(staffBase.title());
-        existingStaff.setEmail(staffBase.email());
-        existingStaff.setPhoneNumber(staffBase.phoneNumber());
-        existingStaff.setHireDate(staffBase.hireDate());
-        existingStaff.setStartDate(staffBase.startDate());
+        existingStaff.setFirstName(updatedStaffBase.firstName());
+        existingStaff.setLastName(updatedStaffBase.lastName());
+        existingStaff.setTitle(updatedStaffBase.title());
+        existingStaff.setEmail(updatedStaffBase.email());
+        existingStaff.setPhoneNumber(updatedStaffBase.phoneNumber());
+        existingStaff.setHireDate(updatedStaffBase.hireDate());
+        existingStaff.setStartDate(updatedStaffBase.startDate());
 
         // persist just means put into hibernate memory and save
         this.staffRepository.persist(existingStaff);
