@@ -27,7 +27,7 @@ public class StaffResource {
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Staff> getAllStaff() {
-        return staffService.getAllStaff();
+        return this.staffService.getAllStaff();
     }
 
     @GET
