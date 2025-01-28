@@ -55,7 +55,7 @@ public class StaffDepartmentService {
         List<StaffDepartment> staffDepartments = getAllStaffDepartments();
 
         List<ModelIdentifier> modelIdentifiers = staffDepartments.stream()
-                .map((staffDeparment) -> {
+                .map((StaffDepartment staffDeparment) -> {
                     return staffDeparment.getModelIdentifier();
                 }).toList();
 

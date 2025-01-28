@@ -19,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import local.zoo.staffservice.dto.ModelIdentifier;
 import local.zoo.staffservice.dto.department.DepartmentBase;
 
 @Entity
@@ -62,6 +63,10 @@ public class Department {
     public Department(DepartmentBase departmentBase) {
         this.name = departmentBase.name();
         this.description = departmentBase.description();
+    }
+
+    public ModelIdentifier getModelIdentifier() {
+        return new ModelIdentifier(this.getId().toString(), this.getName());
     }
 
     public UUID getId() {

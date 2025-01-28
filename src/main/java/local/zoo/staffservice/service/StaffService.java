@@ -41,8 +41,8 @@ public class StaffService {
 
     public List<ModelIdentifier> getAllStaffIdentifiers() {
         List<Staff> staff = getAllStaff();
-        return staff.stream().map((member) -> {
-            return member.getModelIdentifier();
+        return staff.stream().map((Staff staffmember) -> {
+            return staffmember.getModelIdentifier();
         }).toList();
     }
 

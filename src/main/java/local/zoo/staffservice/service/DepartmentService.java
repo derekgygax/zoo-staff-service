@@ -7,8 +7,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import local.zoo.staffservice.dto.ModelIdentifier;
 import local.zoo.staffservice.dto.department.DepartmentBase;
-import local.zoo.staffservice.dto.department.DepartmentIdentifier;
 import local.zoo.staffservice.model.Department;
 import local.zoo.staffservice.repository.DepartmentRepository;
 
@@ -38,8 +38,11 @@ public class DepartmentService {
         return this.departmentRepository.listAll();
     }
 
-    public List<DepartmentIdentifier> getAllDepartmentIdentifiers() {
-        return this.departmentRepository.findAllIdentifiers();
+    public List<ModelIdentifier> getAllDepartmentIdentifiers() {
+        List<Department> departments = getAllDepartments();
+        return departments.stream().map((Department department) -> {
+            return department.getModelIdentifier();
+        }).toList();
     }
 
     @Transactional

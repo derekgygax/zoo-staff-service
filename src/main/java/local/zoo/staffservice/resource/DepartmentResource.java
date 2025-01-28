@@ -12,8 +12,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import local.zoo.staffservice.dto.ModelIdentifier;
 import local.zoo.staffservice.dto.department.DepartmentBase;
-import local.zoo.staffservice.dto.department.DepartmentIdentifier;
 import local.zoo.staffservice.model.Department;
 import local.zoo.staffservice.service.DepartmentService;
 
@@ -33,7 +33,7 @@ public class DepartmentResource {
     @GET
     @Path("/identifiers")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<DepartmentIdentifier> getAllDepartmentIdentifiers() {
+    public List<ModelIdentifier> getAllDepartmentIdentifiers() {
         return this.departmentService.getAllDepartmentIdentifiers();
     }
 
