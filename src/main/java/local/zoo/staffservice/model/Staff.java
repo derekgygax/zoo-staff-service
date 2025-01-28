@@ -22,6 +22,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
+import local.zoo.staffservice.dto.ModelIdentifier;
 import local.zoo.staffservice.dto.staff.StaffBase;
 import local.zoo.staffservice.enums.Title;
 
@@ -100,6 +101,10 @@ public class Staff {
         this.title = staffBase.title();
         this.hireDate = staffBase.hireDate();
         this.startDate = staffBase.startDate();
+    }
+
+    public ModelIdentifier getModelIdentifier() {
+        return new ModelIdentifier(this.getId().toString(), this.getFirstName() + " " + this.getLastName());
     }
 
     public UUID getId() {

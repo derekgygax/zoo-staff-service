@@ -12,8 +12,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import local.zoo.staffservice.dto.ModelIdentifier;
 import local.zoo.staffservice.dto.staff.StaffBase;
-import local.zoo.staffservice.dto.staff.StaffIdentifier;
 import local.zoo.staffservice.model.Staff;
 import local.zoo.staffservice.service.StaffService;
 
@@ -33,7 +33,7 @@ public class StaffResource {
     @GET
     @Path("/identifiers")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<StaffIdentifier> getAllStaffIdentifiers() {
+    public List<ModelIdentifier> getAllStaffIdentifiers() {
         return this.staffService.getAllStaffIdentifiers();
     }
 

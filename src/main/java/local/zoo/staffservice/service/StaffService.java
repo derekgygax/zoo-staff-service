@@ -7,8 +7,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import local.zoo.staffservice.dto.ModelIdentifier;
 import local.zoo.staffservice.dto.staff.StaffBase;
-import local.zoo.staffservice.dto.staff.StaffIdentifier;
 import local.zoo.staffservice.model.Staff;
 import local.zoo.staffservice.repository.StaffRepository;
 
@@ -39,8 +39,11 @@ public class StaffService {
         return this.staffRepository.listAll();
     }
 
-    public List<StaffIdentifier> getAllStaffIdentifiers() {
-        return this.staffRepository.findAllIdentifiers();
+    public List<ModelIdentifier> getAllStaffIdentifiers() {
+        List<Staff> staff = getAllStaff();
+        return staff.stream().map((member) -> {
+            return member.getModelIdentifier();
+        }).toList();
     }
 
     // Add a new staff member

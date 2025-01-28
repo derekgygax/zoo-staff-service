@@ -2,14 +2,13 @@ package local.zoo.staffservice.service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import local.zoo.staffservice.dto.ModelIdentifier;
 import local.zoo.staffservice.dto.staffdepartment.StaffDepartmentBase;
-import local.zoo.staffservice.dto.staffdepartment.StaffDepartmentIdentifierResponse;
 import local.zoo.staffservice.model.Department;
 import local.zoo.staffservice.model.Staff;
 import local.zoo.staffservice.model.StaffDepartment;
@@ -52,19 +51,15 @@ public class StaffDepartmentService {
         return this.staffDepartmentRepository.listAll();
     }
 
-    public List<StaffDepartmentIdentifierResponse> getAllStaffDepartmentIdentifiers() {
+    public List<ModelIdentifier> getAllStaffDepartmentIdentifiers() {
         List<StaffDepartment> staffDepartments = getAllStaffDepartments();
 
-        List<StaffDepartmentIdentifierResponse> staffDepartmentIdentifierResponses = staffDepartments.stream()
+        List<ModelIdentifier> modelIdentifiers = staffDepartments.stream()
                 .map((staffDeparment) -> {
-                    Staff staff = staffDeparment.getStaff();
-                    Department department = staffDeparment.getDepartment();
-                    return new StaffDepartmentIdentifierResponse(
-                            staffDeparment.getId(),
-                            staff.getFirstName() + " " + staff.getLastName() + " in " + department.getName());
-                }).collect(Collectors.toList());
+                    return staffDeparment.getModelIdentifier();
+                }).toList();
 
-        return staffDepartmentIdentifierResponses;
+        return modelIdentifiers;
     }
 
     @Transactional

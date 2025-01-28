@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import local.zoo.staffservice.dto.ModelIdentifier;
 
 @Entity
 @Table(name = "staff_department")
@@ -52,6 +53,12 @@ public class StaffDepartment {
         this.department = department;
         this.staff = staff;
         this.role = role;
+    }
+
+    public ModelIdentifier getModelIdentifier() {
+        return new ModelIdentifier(
+                this.getId().toString(),
+                this.staff.getFirstName() + " " + this.staff.getLastName() + " in " + this.department.getName());
     }
 
     public UUID getId() {
