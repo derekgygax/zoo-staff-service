@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
@@ -26,6 +28,7 @@ public class StaffDepartment {
     private UUID id;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
     private Department department;
 

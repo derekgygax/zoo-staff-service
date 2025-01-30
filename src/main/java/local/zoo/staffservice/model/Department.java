@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -47,7 +45,6 @@ public class Department {
     // Use Instant for UTC timestamps
     private Instant updatedAt;
 
-    @OnDelete(action = OnDeleteAction.RESTRICT)
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<StaffDepartment> staffDepartments;
