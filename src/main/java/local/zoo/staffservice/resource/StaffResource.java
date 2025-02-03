@@ -24,7 +24,7 @@ public class StaffResource {
     StaffService staffService;
 
     @GET
-    @Path("/")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Staff> getAllStaff() {
         return this.staffService.getAllStaff();
@@ -45,7 +45,7 @@ public class StaffResource {
     }
 
     @POST
-    @Path("/")
+    @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addStaff(StaffBase staffBase) {
         this.staffService.addStaff(staffBase);

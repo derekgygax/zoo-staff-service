@@ -24,7 +24,7 @@ public class DepartmentResource {
     DepartmentService departmentService;
 
     @GET
-    @Path("/")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Department> getAllDepartmentes() {
         return departmentService.getAllDepartments();
@@ -45,7 +45,7 @@ public class DepartmentResource {
     }
 
     @POST
-    @Path("/")
+    @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addDepartment(DepartmentBase departmentBase) {
         this.departmentService.addDepartment(departmentBase);
